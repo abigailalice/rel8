@@ -23,6 +23,7 @@ module Rel8.Table.Verify
     , SomeTableSchema(..)
     , showCreateTable
     , checkedShowCreateTable
+    , getNames
     ) where
 
 -- base
@@ -299,6 +300,9 @@ data TypeInfo = TypeInfo
 instance Show TypeInfo where
   show = showTypeInfo
 
+
+getNames :: Rel8able k => k Name -> [String]
+getNames tableSchema = M.keys (schemaToTypeMap tableSchema)
 
 -- @'schemaToTypeMap'@ takes a schema and returns a map of database column names
 -- to the type information associated with the column. It is possible (though
